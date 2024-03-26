@@ -5,7 +5,8 @@ interface LogicTypes {
   addRect: () => void,
   addCircle: () => void,
   addText: () => void,
-  Save: () => void,
+  addImage: (file: File) => void,
+  convertToSVG: () => string,
   zoomIn: () => void,
   zoomOut: () => void,
   Undo: () => void,
@@ -80,7 +81,7 @@ export function Logic (): LogicTypes {
         canvasRef.current.renderAll();
         setItems(prevItems => [...prevItems, rect])
     };
-    console.log(items)
+
     const addCircle = () => {
       if (!canvasRef.current) return;
       const circle = new fabric.Circle({
@@ -107,9 +108,29 @@ export function Logic (): LogicTypes {
     setItems(prevItems => [...prevItems, text]);
     };
 
-    const Save = () => {
-      const svg = canvasRef.current?.toSVG()
-      alert(svg)
+    const addImage = (file: File) => {
+      if (!canvasRef.current) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const url = event.target?.result as string;
+        fabric.Image.fromURL(url, (img) => {
+          img.scaleToWidth(150);
+          img.scaleToHeight(200);
+          canvasRef.current?.add(img);
+          canvasRef.current?.renderAll();
+          setItems(prevItems => [...prevItems, img]);
+        });
+      };
+      reader.readAsDataURL(file);
+    };
+
+    const convertToSVG = () => {
+      if(!canvasRef.current){
+        return ''
+      }
+      else {
+        return canvasRef.current.toSVG()
+      }
     };
 
     const zoomIn = () => {
@@ -125,7 +146,8 @@ export function Logic (): LogicTypes {
         addRect,
         addCircle,
         addText,
-        Save,
+        addImage,
+        convertToSVG,
         zoomIn,
         zoomOut,
         Undo,

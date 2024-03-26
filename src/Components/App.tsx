@@ -7,7 +7,8 @@ const FabricCanvas: React.FC = () => {
     addRect,
     addCircle,
     addText,
-    Save,
+    addImage,
+    convertToSVG,
     zoomIn,
     zoomOut,
     Undo,
@@ -15,13 +16,21 @@ const FabricCanvas: React.FC = () => {
     clearCanvas
   } = Logic()
 
+  const handleLoadImg = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const img = event.target.files?.[0];
+    if (img) {
+      addImage(img);
+      event.target.value = '';
+    }
+  };
+
   return (
     <div>
       <canvas id="fabric-canvas" />
       <button onClick={addRect}>Add Square</button>
       <button onClick={addCircle}>Add Circle</button>
       <button onClick={addText}>Add Text</button>
-      <button onClick={Save}>Save</button>
+      <button onClick={convertToSVG}>Save</button>
       <button onClick={zoomIn}>+</button>
       <button onClick={zoomOut}>-</button>
       <button onClick={Undo}>Undo</button>
@@ -29,6 +38,8 @@ const FabricCanvas: React.FC = () => {
       <button onClick={clearCanvas}>clearCanvas</button>
       <input 
       type="file"
+      accept=".png, .jpg, .svg"
+      onChange={handleLoadImg}
       />
     </div>
   );
