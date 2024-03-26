@@ -31,8 +31,18 @@ export function Logic (): LogicTypes {
         })
         canvasRef.current = canvas;
       };
+      window.addEventListener('resize', handleResize);
+      return () =>  window.removeEventListener('resize', handleResize);
     }, []);
 
+    const handleResize = () => {
+      if (canvasRef.current) {
+        canvasRef.current.setWidth(window.innerWidth);
+        canvasRef.current.setHeight(window.innerHeight);
+        canvasRef.current.renderAll();
+      }
+    };
+  
     React.useEffect(()=>{
       if(!canvasRef.current) return;
       canvasRef.current.setZoom(zoomLevel)
