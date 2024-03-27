@@ -1,6 +1,7 @@
 import React from 'react';
-import { fabric } from 'fabric';
-import { Logic } from './Logic';
+import { Logic } from './Logic/Logic';
+import Zoom from './Zoom/Zoom';
+import styles from './App.module.scss'
 
 const FabricCanvas: React.FC = () => {
   const { 
@@ -13,7 +14,9 @@ const FabricCanvas: React.FC = () => {
     zoomOut,
     Undo,
     Redo,
-    clearCanvas
+    clearCanvas,
+    addTriangle,
+    zoomLevel
   } = Logic()
 
   const handleLoadImg = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,22 +28,32 @@ const FabricCanvas: React.FC = () => {
   };
 
   return (
-    <div>
-      <canvas id="fabric-canvas" />
+    <div className={styles.container}>
+      <canvas className={styles.container__canvas} id="fabric-canvas" />
+      <div className={styles.container__zoom}>
+      <Zoom 
+        zoomIn = {zoomIn}
+        zoomOut = {zoomOut}
+        zoomLevel = {zoomLevel}
+      />
+      </div>
       <button onClick={addRect}>Add Square</button>
       <button onClick={addCircle}>Add Circle</button>
       <button onClick={addText}>Add Text</button>
       <button onClick={convertToSVG}>Save</button>
+
       <button onClick={zoomIn}>+</button>
       <button onClick={zoomOut}>-</button>
       <button onClick={Undo}>Undo</button>
       <button onClick={Redo}>Redo</button>
       <button onClick={clearCanvas}>clearCanvas</button>
+      <button onClick={addTriangle}>Triangle</button>
       <input 
       type="file"
       accept=".png, .jpg, .svg"
       onChange={handleLoadImg}
       />
+      
     </div>
   );
 };

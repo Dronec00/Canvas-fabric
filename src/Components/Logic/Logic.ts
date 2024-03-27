@@ -4,6 +4,7 @@ import { fabric } from 'fabric';
 interface LogicTypes {
   addRect: () => void,
   addCircle: () => void,
+  addTriangle: () => void,
   addText: () => void,
   addImage: (file: File) => void,
   convertToSVG: () => string,
@@ -12,6 +13,7 @@ interface LogicTypes {
   Undo: () => void,
   Redo: () => void,
   clearCanvas: () => void,
+  zoomLevel: number
 }
 
 export function Logic (): LogicTypes {
@@ -32,7 +34,7 @@ export function Logic (): LogicTypes {
         canvasRef.current = canvas;
       };
       window.addEventListener('resize', handleResize);
-      return () =>  window.removeEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const handleResize = () => {
@@ -42,11 +44,10 @@ export function Logic (): LogicTypes {
         canvasRef.current.renderAll();
       }
     };
-  
+    console.log(zoomLevel)
     React.useEffect(()=>{
       if(!canvasRef.current) return;
       canvasRef.current.setZoom(zoomLevel)
-      console.log(canvasRef.current.getObjects())
     },[zoomLevel]);
 
     const Undo = () => {
@@ -84,12 +85,26 @@ export function Logic (): LogicTypes {
           left: 100,
           top: 100,
           fill: 'red',
-          width: 100,
-          height: 100,
+          width: 150,
+          height: 150,
         });
         canvasRef.current.add(rect);
         canvasRef.current.renderAll();
         setItems(prevItems => [...prevItems, rect])
+    };
+
+    const addTriangle = () => {
+      if (!canvasRef.current) return;
+      const triangle = new fabric.Triangle({
+        width: 250,
+        height: 300,
+        left: 300,
+        top: 300,
+        fill: '#74be04',
+      });
+      canvasRef.current.add(triangle);
+      canvasRef.current.renderAll();
+      setItems(prevItems => [...prevItems, triangle]);
     };
 
     const addCircle = () => {
@@ -97,7 +112,7 @@ export function Logic (): LogicTypes {
       const circle = new fabric.Circle({
         left: 100,
         top: 200,
-        radius: 40,
+        radius: 60,
         fill: '#225bce',
       });
       canvasRef.current.add(circle);
@@ -110,7 +125,7 @@ export function Logic (): LogicTypes {
     const text = new fabric.Textbox('Text', {
       left: 70,
       top: 50,
-      fontSize: 30,
+      fontSize: 40,
       fill: 'black',
     });
     canvasRef.current.add(text);
@@ -154,6 +169,7 @@ export function Logic (): LogicTypes {
     }
     return {
         addRect,
+        addTriangle,
         addCircle,
         addText,
         addImage,
@@ -162,7 +178,8 @@ export function Logic (): LogicTypes {
         zoomOut,
         Undo,
         Redo,
-        clearCanvas
+        clearCanvas,
+        zoomLevel
     }
 }
 

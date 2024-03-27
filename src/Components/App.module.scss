@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    position: relative;
+    &__zoom {
+        height: 60px;
+        width: 200px;
+        border-radius: 20px;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: #D9D9D9;
+    }
+
+    &__canvas {
+        flex: 1;
+        display: flex;
+      }
+    
+    &__header {
+        
+    }
+
+    &__sidebar {
+
+    }  
+}

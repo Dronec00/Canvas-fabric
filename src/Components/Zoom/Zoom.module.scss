@@ -1,0 +1,34 @@
+.zoom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    &__plus,
+    &__minus {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  
+    &__plus {
+      margin-left: 10px;
+  
+      &_disable {
+        svg path,
+        svg line {
+            opacity: 0.3;
+        }
+      }
+    }
+  
+    &__minus {
+      margin-right: 10px;
+    
+      &_disable {
+        svg path,
+        svg line {
+            opacity: 0.3;
+        }
+      }
+    }
+  }
