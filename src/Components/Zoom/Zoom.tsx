@@ -48,14 +48,14 @@ const Zoom = ({
           className={styles.zoom__plus}
           onClick={handleZoomIn}
         >
-          <img src={plus} alt="plus" />
+          <img src={plus} alt='plus' />
         </button>
         <span> {zoom} % </span>
         <button
           className={styles.zoom__minus}
           onClick={handleZoomOut}
         >
-          <img src={minus} alt="minus" />
+          <img src={minus} alt='minus' />
         </button>
       </div>
     );

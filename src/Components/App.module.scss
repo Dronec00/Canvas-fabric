@@ -1,6 +1,12 @@
 .container {
     display: flex;
     position: relative;
+
+    &__canvas {
+        flex: 1;
+        display: flex;
+      }
+
     &__zoom {
         height: 60px;
         width: 200px;
@@ -11,13 +17,16 @@
         background-color: #D9D9D9;
     }
 
-    &__canvas {
-        flex: 1;
-        display: flex;
-      }
+
     
-    &__header {
-        
+    &__historyNav {
+        height: 60px;
+        width: 170px;
+        border-radius: 20px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: #A0A4C8;
     }
 
     &__sidebar {

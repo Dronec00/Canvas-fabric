@@ -1,0 +1,21 @@
+.history {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    &__undo,
+    &__redo {
+        margin-top: 7px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer; 
+    }
+  
+    &__undo {
+      margin-left: 10px;
+    }
+  
+    &__redo {
+      margin-right: 10px;
+    }
+  }

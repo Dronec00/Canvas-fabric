@@ -12,23 +12,9 @@
   
     &__plus {
       margin-left: 10px;
-  
-      &_disable {
-        svg path,
-        svg line {
-            opacity: 0.3;
-        }
-      }
     }
   
     &__minus {
       margin-right: 10px;
-    
-      &_disable {
-        svg path,
-        svg line {
-            opacity: 0.3;
-        }
-      }
     }
   }

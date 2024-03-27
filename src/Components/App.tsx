@@ -2,6 +2,7 @@ import React from 'react';
 import { Logic } from './Logic/Logic';
 import Zoom from './Zoom/Zoom';
 import styles from './App.module.scss'
+import HistoryNavigation from './HistoryNavigation/HistoryNavigation';
 
 const FabricCanvas: React.FC = () => {
   const { 
@@ -31,11 +32,19 @@ const FabricCanvas: React.FC = () => {
     <div className={styles.container}>
       <canvas className={styles.container__canvas} id="fabric-canvas" />
       <div className={styles.container__zoom}>
-      <Zoom 
-        zoomIn = {zoomIn}
-        zoomOut = {zoomOut}
-        zoomLevel = {zoomLevel}
-      />
+        <Zoom 
+          zoomIn = {zoomIn}
+          zoomOut = {zoomOut}
+          zoomLevel = {zoomLevel}
+        />
+      </div>
+
+      <div className={styles.container__historyNav}>
+        <HistoryNavigation
+          Undo = {Undo}
+          Redo = {Redo}
+
+        />
       </div>
       <button onClick={addRect}>Add Square</button>
       <button onClick={addCircle}>Add Circle</button>
