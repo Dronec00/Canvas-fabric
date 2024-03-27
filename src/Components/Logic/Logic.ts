@@ -33,8 +33,20 @@ export function Logic (): LogicTypes {
         })
         canvasRef.current = canvas;
       };
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.ctrlKey) {
+          if (event.key === "z") {
+            Undo();
+          } else if (event.key === "y") {
+            Redo();
+          }
+        }
+      };
       window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener("keydown", handleKeyDown);
+      }
     }, []);
 
     const handleResize = () => {
@@ -49,35 +61,6 @@ export function Logic (): LogicTypes {
       if(!canvasRef.current) return;
       canvasRef.current.setZoom(zoomLevel)
     },[zoomLevel]);
-
-    const Undo = () => {
-      if(items.length > 0 && canvasRef.current){
-        const lastItem = items[items.length - 1];
-        canvasRef.current.remove(lastItem);
-        const Items = items.slice(0, -1);
-        setItems(Items);
-        setRemovedItems(prevRemovedItems => [...prevRemovedItems, lastItem]);
-      }
-    }
-
-    const Redo = () => {
-      if (removedItems.length > 0) {
-        const lastRemovedItem = removedItems[removedItems.length - 1];
-        setItems((prevItems) => [...prevItems, lastRemovedItem]);
-        setRemovedItems(prevRemovedItems => prevRemovedItems.slice(0, prevRemovedItems.length - 1));
-        canvasRef.current?.add(lastRemovedItem)
-      };
-    };
-
-    const clearCanvas = () => {
-      if (canvasRef.current) {
-        canvasRef.current.clear();
-        canvasRef.current.backgroundColor = backgroundColor;
-        canvasRef.current.renderAll();
-        setItems([]);
-        setRemovedItems([]);
-      }
-    };
 
     const addRect = () => {
       if (!canvasRef.current) return;
@@ -167,6 +150,36 @@ export function Logic (): LogicTypes {
       if(!canvasRef.current) return;
       setZoomLevel(prev => prev - 0.1);
     }
+
+    const Undo = () => {
+      if(items.length > 0 && canvasRef.current){
+        const lastItem = items[items.length - 1];
+        canvasRef.current.remove(lastItem);
+        const Items = items.slice(0, -1);
+        setItems(Items);
+        setRemovedItems(prevRemovedItems => [...prevRemovedItems, lastItem]);
+      }
+    }
+
+    const Redo = () => {
+      if (removedItems.length > 0) {
+        const lastRemovedItem = removedItems[removedItems.length - 1];
+        setItems((prevItems) => [...prevItems, lastRemovedItem]);
+        setRemovedItems(prevRemovedItems => prevRemovedItems.slice(0, prevRemovedItems.length - 1));
+        canvasRef.current?.add(lastRemovedItem)
+      };
+    };
+
+    const clearCanvas = () => {
+      if (canvasRef.current) {
+        canvasRef.current.clear();
+        canvasRef.current.backgroundColor = backgroundColor;
+        canvasRef.current.renderAll();
+        setItems([]);
+        setRemovedItems([]);
+      }
+    };
+
     return {
         addRect,
         addTriangle,
