@@ -3,6 +3,7 @@ import { Logic } from './Logic/Logic';
 import Zoom from './Zoom/Zoom';
 import styles from './App.module.scss'
 import HistoryNavigation from './HistoryNavigation/HistoryNavigation';
+import Sidebar from './Sidebar/Sidebar';
 
 const FabricCanvas: React.FC = () => {
   const { 
@@ -10,23 +11,15 @@ const FabricCanvas: React.FC = () => {
     addCircle,
     addText,
     addImage,
+    addTriangle,
     convertToSVG,
     zoomIn,
     zoomOut,
     Undo,
     Redo,
     clearCanvas,
-    addTriangle,
     zoomLevel
   } = Logic()
-
-  const handleLoadImg = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const img = event.target.files?.[0];
-    if (img) {
-      addImage(img);
-      event.target.value = '';
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -43,25 +36,19 @@ const FabricCanvas: React.FC = () => {
         <HistoryNavigation
           Undo = {Undo}
           Redo = {Redo}
-
         />
       </div>
-      <button onClick={addRect}>Add Square</button>
-      <button onClick={addCircle}>Add Circle</button>
-      <button onClick={addText}>Add Text</button>
-      <button onClick={convertToSVG}>Save</button>
 
-      <button onClick={zoomIn}>+</button>
-      <button onClick={zoomOut}>-</button>
-      <button onClick={Undo}>Undo</button>
-      <button onClick={Redo}>Redo</button>
-      <button onClick={clearCanvas}>clearCanvas</button>
-      <button onClick={addTriangle}>Triangle</button>
-      <input 
-      type="file"
-      accept=".png, .jpg, .svg"
-      onChange={handleLoadImg}
-      />
+      <div className={styles.container__sidebar}>
+        <Sidebar
+        addCircle={addCircle}
+        addImage={addImage}
+        addRect={addRect}
+        addText={addText}
+        addTriangle={addTriangle}
+        convertToSVG={convertToSVG}
+        />
+      </div>
       
     </div>
   );

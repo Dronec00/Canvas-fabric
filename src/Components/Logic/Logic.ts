@@ -65,11 +65,13 @@ export function Logic (): LogicTypes {
     const addRect = () => {
       if (!canvasRef.current) return;
         const rect = new fabric.Rect({
-          left: 100,
+          left: 250,
           top: 100,
           fill: 'red',
           width: 150,
           height: 150,
+          stroke: '#717f5c',
+          strokeWidth: 5,
         });
         canvasRef.current.add(rect);
         canvasRef.current.renderAll();
@@ -81,9 +83,11 @@ export function Logic (): LogicTypes {
       const triangle = new fabric.Triangle({
         width: 250,
         height: 300,
-        left: 300,
+        left: 400,
         top: 300,
         fill: '#74be04',
+        stroke: 'black',
+        strokeWidth: 5,
       });
       canvasRef.current.add(triangle);
       canvasRef.current.renderAll();
@@ -93,10 +97,12 @@ export function Logic (): LogicTypes {
     const addCircle = () => {
       if (!canvasRef.current) return;
       const circle = new fabric.Circle({
-        left: 100,
+        left: 200,
         top: 200,
-        radius: 60,
+        radius: 90,
         fill: '#225bce',
+        stroke: '#a920cf',
+        strokeWidth: 5,
       });
       canvasRef.current.add(circle);
       canvasRef.current.renderAll();
@@ -106,7 +112,7 @@ export function Logic (): LogicTypes {
     const addText = () => {
     if (!canvasRef.current) return;
     const text = new fabric.Textbox('Text', {
-      left: 70,
+      left: 270,
       top: 50,
       fontSize: 40,
       fill: 'black',

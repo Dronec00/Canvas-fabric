@@ -30,6 +30,12 @@
     }
 
     &__sidebar {
-
+        height: 90vh;
+        width: 90px;
+        border-radius: 20px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: #A0A4C8;
     }  
 }
