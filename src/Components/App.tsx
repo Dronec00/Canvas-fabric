@@ -4,6 +4,7 @@ import Zoom from './Zoom/Zoom';
 import styles from './App.module.scss'
 import HistoryNavigation from './HistoryNavigation/HistoryNavigation';
 import Sidebar from './Sidebar/Sidebar';
+import Modal from './Modal/Modal';
 
 const FabricCanvas: React.FC = () => {
   const { 
@@ -21,6 +22,12 @@ const FabricCanvas: React.FC = () => {
     zoomLevel
   } = Logic()
 
+  const [modalActive, setModalActive] = React.useState<boolean>(false)
+
+  const handleModalActive = (value: boolean) => {
+    setModalActive(value)
+  }
+  console.log(modalActive)
   return (
     <div className={styles.container}>
       <canvas className={styles.container__canvas} id="fabric-canvas" />
@@ -41,15 +48,23 @@ const FabricCanvas: React.FC = () => {
 
       <div className={styles.container__sidebar}>
         <Sidebar
-        addCircle={addCircle}
-        addImage={addImage}
-        addRect={addRect}
-        addText={addText}
-        addTriangle={addTriangle}
-        convertToSVG={convertToSVG}
+          addCircle={addCircle}
+          addImage={addImage}
+          addRect={addRect}
+          addText={addText}
+          addTriangle={addTriangle}
+          convertToSVG={convertToSVG}
+          clearCanvas={clearCanvas}
+          handleModalActive={handleModalActive}
         />
       </div>
-      
+      {modalActive && (
+        <Modal 
+          handleModalActive={handleModalActive}
+          convertToSVG={convertToSVG}
+          isOpen={modalActive}
+        />
+      )}
     </div>
   );
 };

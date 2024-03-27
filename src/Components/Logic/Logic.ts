@@ -33,19 +33,10 @@ export function Logic (): LogicTypes {
         })
         canvasRef.current = canvas;
       };
-      const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.ctrlKey) {
-          if (event.key === "z") {
-            Undo();
-          } else if (event.key === "y") {
-            Redo();
-          }
-        }
-      };
+
       window.addEventListener('resize', handleResize);
       return () => {
         window.removeEventListener('resize', handleResize);
-        window.removeEventListener("keydown", handleKeyDown);
       }
     }, []);
 
@@ -56,7 +47,6 @@ export function Logic (): LogicTypes {
         canvasRef.current.renderAll();
       }
     };
-    console.log(zoomLevel)
     React.useEffect(()=>{
       if(!canvasRef.current) return;
       canvasRef.current.setZoom(zoomLevel)

@@ -8,7 +8,7 @@
         border: none;
         cursor: pointer;
         &:hover {
-            opacity: 0.6;
+            opacity: .6;
         }
     }
     &__list {
@@ -20,14 +20,14 @@
         li {
             cursor: pointer;
             &:hover {
-                opacity: 0.8;
+                opacity: .8;
             }
         }
     }
     &__fileUploader {
         cursor: pointer;
         &:hover{
-            opacity: 0.8;
+            opacity: .8;
         } 
     }
     &__inputUpload {
@@ -35,4 +35,24 @@
         height: 0;
         width: 0;
       }
-}
+      button {
+        display: inline-block;
+        padding: 0.5rem 0.1rem;
+        width: 100%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #fff;
+      }
+} 
+  .clear {
+    background-color: #007bff;
+  }
+  
+  .save {
+    background-color: #28a745;
+  }

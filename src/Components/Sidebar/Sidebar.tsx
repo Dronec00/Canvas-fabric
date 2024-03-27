@@ -6,7 +6,6 @@ import circle from '../../img/circle.svg'
 import rect from '../../img/rect.svg'
 import text from '../../img/text.svg'
 import upload from '../../img/upload.svg'
-import convert from '../../img/convert.svg'
 
 interface SidebarProps {
     addRect: () => void,
@@ -14,7 +13,9 @@ interface SidebarProps {
     addText: () => void,
     addImage: (file: File) => void,
     addTriangle: () => void,
-    convertToSVG: () => void
+    convertToSVG: () => void,
+    clearCanvas: () => void,
+    handleModalActive: (value: boolean) => void
 }
 
 const Sidebar = ({
@@ -23,7 +24,8 @@ const Sidebar = ({
     addText,
     addImage,
     addTriangle,
-    convertToSVG
+    clearCanvas,
+    handleModalActive
 }: SidebarProps) => {
 
     const [openElements, setOpenElements] = React.useState<boolean>(false);
@@ -71,6 +73,7 @@ const Sidebar = ({
         Текст
         <label htmlFor="upload" className={styles.sidebar__label}> 
         <img src={upload} alt='upload' className={styles.sidebar__fileUploader} />
+        
         </label>
         <input 
             id="upload"
@@ -79,11 +82,15 @@ const Sidebar = ({
             onChange={handleLoadImg}
             className={styles.sidebar__inputUpload}
         />
-        <button
-        className={styles.sidebar__elements}
-        onClick={convertToSVG}
-        >
-        <img src={convert} alt='text' />
+        <button 
+            className={styles.clear} 
+            onClick={clearCanvas}>
+            Очистить холст
+        </button>
+        <button 
+            className={styles.save} 
+            onClick={() => handleModalActive(true)}>
+            Сохранить
         </button>
       </div>
     );
