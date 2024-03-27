@@ -14,8 +14,8 @@ const Zoom = ({
     zoomOut,
     zoomLevel
   }: zoomTypesProps) => {
-    const [maxZoom, setMaxZoom] = React.useState(false);
-    const [minZoom, setMinZoom] = React.useState(false);
+    const [maxZoom, setMaxZoom] = React.useState<boolean>(false);
+    const [minZoom, setMinZoom] = React.useState<boolean>(false);
   
     const zoom = Math.round(zoomLevel * 100);
   

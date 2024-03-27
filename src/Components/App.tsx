@@ -20,14 +20,13 @@ const FabricCanvas: React.FC = () => {
     Redo,
     clearCanvas,
     zoomLevel
-  } = Logic()
+  } = Logic();
 
-  const [modalActive, setModalActive] = React.useState<boolean>(false)
+  const [modalActive, setModalActive] = React.useState<boolean>(false);
 
   const handleModalActive = (value: boolean) => {
-    setModalActive(value)
-  }
-  console.log(modalActive)
+    setModalActive(value);
+  };
   return (
     <div className={styles.container}>
       <canvas className={styles.container__canvas} id="fabric-canvas" />

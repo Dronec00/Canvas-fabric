@@ -19,8 +19,8 @@ interface LogicTypes {
 export function Logic (): LogicTypes {
     const canvasRef = React.useRef<fabric.Canvas | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(1);
-    const [items, setItems] = React.useState<fabric.Object[]>([])
-    const [removedItems, setRemovedItems] = React.useState<fabric.Object[]>([])
+    const [items, setItems] = React.useState<fabric.Object[]>([]);
+    const [removedItems, setRemovedItems] = React.useState<fabric.Object[]>([]);
 
     const backgroundColor: string = "#F2EAFF"
 
@@ -49,7 +49,7 @@ export function Logic (): LogicTypes {
     };
     React.useEffect(()=>{
       if(!canvasRef.current) return;
-      canvasRef.current.setZoom(zoomLevel)
+      canvasRef.current.setZoom(zoomLevel);
     },[zoomLevel]);
 
     const addRect = () => {
@@ -65,7 +65,7 @@ export function Logic (): LogicTypes {
         });
         canvasRef.current.add(rect);
         canvasRef.current.renderAll();
-        setItems(prevItems => [...prevItems, rect])
+        setItems(prevItems => [...prevItems, rect]);
     };
 
     const addTriangle = () => {
@@ -133,7 +133,7 @@ export function Logic (): LogicTypes {
         return ''
       }
       else {
-        return canvasRef.current.toSVG()
+        return canvasRef.current.toSVG();
       }
     };
 
@@ -154,8 +154,8 @@ export function Logic (): LogicTypes {
         const Items = items.slice(0, -1);
         setItems(Items);
         setRemovedItems(prevRemovedItems => [...prevRemovedItems, lastItem]);
-      }
-    }
+      };
+    };
 
     const Redo = () => {
       if (removedItems.length > 0) {
@@ -173,7 +173,7 @@ export function Logic (): LogicTypes {
         canvasRef.current.renderAll();
         setItems([]);
         setRemovedItems([]);
-      }
+      };
     };
 
     return {
